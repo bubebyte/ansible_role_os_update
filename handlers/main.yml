@@ -1,1 +1,20 @@
 ---
+- name: Reboot
+  shell: sleep 1 && shutdown -r now "Reboot by ansible os update"
+  async: 1
+  poll: 0
+  changed_when: true
+  failed_when: false
+  when:
+    - os_update_reboot_if_required|bool
+  notify: Wait until ansible port is available again
+
+- name: Wait until ansible port is available again
+  delegate_to: localhost
+  wait_for:
+    host: "{{ ansible_default_ipv4.address }}"
+    port: "{{ ansible_port }}"
+    state: started
+    delay: 10
+    timeout: "{{ os_update_wait_timeout }}"
+  when: os_update_check_system_after_reboot|bool

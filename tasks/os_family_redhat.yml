@@ -1,0 +1,17 @@
+---
+- name: Install yum-utils
+  dnf:
+    name: yum-utils
+    state: present
+
+- name: Upgrade all packages
+  dnf:
+    name: "*"
+    state: latest
+
+- name: Check if restart is required
+  command: needs-restarting -r
+  register: needs_restarting
+  changed_when: needs_restarting.rc == 1
+  failed_when: needs_restarting.rc != 0 and needs_restarting.rc != 1
+  notify: Reboot

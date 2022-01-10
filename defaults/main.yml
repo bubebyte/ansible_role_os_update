@@ -1,1 +1,4 @@
 ---
+os_update_reboot_if_required: true
+os_update_check_system_after_reboot: true
+os_update_wait_timeout: 120
