@@ -1,0 +1,25 @@
+---
+galaxy_info:
+  role_name: os_update
+  author: Armin Bube
+  description: "Ansible role to perform OS update."
+
+  license: MIT
+
+  min_ansible_version: "2.10"
+
+  github_branch: main
+
+  platforms:
+    - name: EL
+      versions:
+        - 7
+        - 8
+
+  galaxy_tags:
+    - package
+    - server
+    - istall
+    - update
+
+dependencies: []
